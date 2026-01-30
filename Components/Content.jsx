@@ -1,4 +1,4 @@
-function Content({ task,deleteTask}) {
+function Content({ input,task, deleteTask, editTask, ref,ref1}) {
   return (
     <>
       <div className="flex flex-col mt-4 gap-1">
@@ -12,10 +12,23 @@ function Content({ task,deleteTask}) {
                 <p>{value.text}</p>
               </div>
               <div className="flex gap-1">
-                <button className="bg-green-400 px-2 border-2 ">Edit</button>
-                <button className="bg-green-400 px-2 border-2 "  onClick={(e) => {
-                  deleteTask(value.id)
-                }}>Delete </button>
+                <button ref={ref1}
+                  className="bg-green-400 px-2 border-2"
+                  onClick={(e) => {
+                    ref.current.focus();
+                    editTask(value.text,value.id);
+                  }}
+                >
+                  Edit
+                </button>
+                <button
+                  className="bg-green-400 px-2 border-2"
+                  onClick={(e) => {
+                    deleteTask(value.id);
+                  }}
+                >
+                  Delete
+                </button>
               </div>
             </div>
           );
