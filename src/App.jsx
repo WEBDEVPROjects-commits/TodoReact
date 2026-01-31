@@ -10,16 +10,16 @@ function App() {
   const [isCompleted,setIsCompleted]=useState(true);
   const ref=useRef(null);
   const [currentId,setCurrentId]=useState(null);
-  const ref1=useRef(null);
+
   const resetInput=()=>{
-    ref.current.value=""
+    setInput("");
     ref.current.focus();
   }
   const addTask = () => {
     setTask((task) => {
           return [...task,{id:Date.now(),text:input}]
     })
-    resetInput()
+    resetInput();
   };
   const deleteTask=(taskIdToRemove)=>{
     setTask((task) => {
@@ -27,30 +27,32 @@ function App() {
            return task.id !==taskIdToRemove
         })
     })
+    setIsCompleted(true);
     resetInput()
   }
   const editTask=(textInTask,idInTask)=>{
       setIsCompleted(false);
-      ref.current.value=textInTask;
+      setInput(textInTask)
       setCurrentId(idInTask);
   }
   const saveEditedTask=() => {
     setTask((task) => {
      return task.map((element) => {
-        if(element.id===currentId){
-          return {...element,text:ref.current.value}
+       if(element.id===currentId && input.trim()!==""){
+         return {...element,text:input}
         }
         return {...element}
-    }) 
+      }) 
     })
+    resetInput()
   }
 
     return (
     <>
-      <div className="h-screen bg-zinc-500 flex justify-center">
-        <div className="Container flex flex-col border-4 w-3/12 h-1/2 p-2">
-          <Header ref={ref}input={input} setInput={setInput} addTask={addTask} isCompleted={isCompleted} setIsCompleted={setIsCompleted} saveEditedTask={saveEditedTask}></Header>
-          <Content input={input} task={task} deleteTask={deleteTask} editTask={editTask} ref={ref} ref1={ref1}></Content>
+      <div className="h-screen bg-[#1E2530] bg-linear-to-br from-[#2C3440] to-[#1E2530] flex justify-center p-4 ">
+        <div className="Container flex flex-col w-3/12 min-h-1/2 self-start p-2 bg-[#202733] border border-[#2A3342] shadow-xl rounded-xl font-serif">
+          <Header input={input}ref={ref} setInput={setInput} addTask={addTask} isCompleted={isCompleted} setIsCompleted={setIsCompleted} saveEditedTask={saveEditedTask}></Header>
+          <Content task={task} deleteTask={deleteTask} editTask={editTask} ref={ref}></Content>
         </div>
       </div>
     </>

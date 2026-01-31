@@ -1,28 +1,33 @@
-function Content({ input,task, deleteTask, editTask, ref,ref1}) {
+function Content({ task, deleteTask, editTask, ref }) {
   return (
     <>
       <div className="flex flex-col mt-4 gap-1">
         {task.map((value, index) => {
           return (
             <div
-              className="border-2 flex gap-1  justify-between p-1"
+              className="flex gap-1 justify-between p-2 bg-[#263041] border border-[#3A4456] rounded-md "
               key={value.id}
             >
-              <div>
-                <p>{value.text}</p>
+              <div className="flex content-center gap-2 self-center">
+                <div className="flex content-center flex-start">
+                  <input type="checkbox" className="h-full accent-[#3B82F6] scale-125"></input>
+                </div>
+                <div>
+                <div className="text-[#D1D5DB] text-sm flex flex-wrap">{value.text}</div>
+                </div>
               </div>
               <div className="flex gap-1">
-                <button ref={ref1}
-                  className="bg-green-400 px-2 border-2"
+                <button
+                  className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-2 rounded-sm"
                   onClick={(e) => {
                     ref.current.focus();
-                    editTask(value.text,value.id);
+                    editTask(value.text, value.id);
                   }}
                 >
                   Edit
                 </button>
                 <button
-                  className="bg-green-400 px-2 border-2"
+                  className="bg-[#EF4444] hover:bg-[#DC2626] text-white px-2 rounded-sm"
                   onClick={(e) => {
                     deleteTask(value.id);
                   }}
