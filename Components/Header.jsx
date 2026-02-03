@@ -38,17 +38,17 @@ function Header({
                   }}
                 ></img>
               </div>
-            ) : (
-              <div></div>
-            )}
+            ) : null}
           </div>
           <button
-            className="h-full flex self-center px-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white content-center rounded-sm"
+            className="h-full flex self-center px-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white content-center rounded-sm "
             onClick={() => {
-              if (input.trim() != "") {
-                addTask();
-              } else {
-                alert("You can't add empty task");
+              if(isCompleted){
+                if (input.trim() != "") {
+                  addTask();
+                } else {
+                  alert("You can't add empty task");
+                }
               }
             }}
           >
